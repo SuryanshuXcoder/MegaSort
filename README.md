@@ -87,4 +87,4 @@ src/
 supabase/
   migrations/
     001_megasort.sql
-```
+```MegaSort 2.0 deployment
