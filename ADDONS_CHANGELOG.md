@@ -39,3 +39,11 @@ npm run typecheck # verified clean
 ```
 Supabase credentials are already in `.env`. The `supabase/migrations` folder has the full schema —
 run those migrations against your Supabase project if you're pointing at a fresh instance.
+
+## MegaSort UI 2.0
+- Premium dashboard hero and library health
+- Clickable duplicate center with SHA-256 groups
+- File format badges and MIME details
+- Smart upload preflight classification
+- Refined responsive light/dark interface
+- Production email confirmation redirects to current site origin
