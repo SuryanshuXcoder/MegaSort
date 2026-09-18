@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { Archive, ChevronLeft, ChevronRight, Command, FileImage, FolderOpen, Hash, LayoutDashboard, Moon, Settings, Sun, Tag, Trash2, Upload, Search, LogOut } from 'lucide-react';
+import { Archive, ChevronLeft, ChevronRight, Command, Hash, LayoutDashboard, Moon, Settings, Sun, Tag, Trash2, Upload, Search, LogOut, FolderOpen } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -28,6 +28,8 @@ export function Layout({ page, setPage, children }: { page: Page; setPage: (p: P
     return () => window.removeEventListener('keydown', key);
   }, []);
 
+  const exitGuest=()=>{localStorage.removeItem('megasort-guest');window.location.reload();};
+
   return <div className="app-shell">
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="brand"><div className="brand-icon"><Archive size={20}/></div>{!collapsed && <span>MegaSort</span>}</div>
@@ -35,8 +37,8 @@ export function Layout({ page, setPage, children }: { page: Page; setPage: (p: P
       <button className="collapse" onClick={()=>setCollapsed(v=>!v)}>{collapsed ? <ChevronRight size={18}/> : <ChevronLeft size={18}/>}</button>
       <div className="profile">
         <div className="avatar">{user?.email?.slice(0,1).toUpperCase() || 'G'}</div>
-        {!collapsed && <div className="profile-text"><strong>{guest ? 'Guest' : user?.email}</strong><small>{guest ? 'Data stays in this session' : 'Cloud account'}</small></div>}
-        {!guest && <button className="icon-btn" title="Sign out" onClick={signOut}><LogOut size={16}/></button>}
+        {!collapsed && <div className="profile-text"><strong>{guest ? 'Guest' : user?.email}</strong><small>{guest ? 'Local session' : 'Cloud account'}</small></div>}
+        <button className="icon-btn" title={guest?'Exit Guest':'Sign out'} onClick={guest?exitGuest:signOut}><LogOut size={16}/></button>
       </div>
     </aside>
     <main className="main">
